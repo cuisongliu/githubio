@@ -7,3 +7,4 @@ hugo server --theme=hugo-nuo --buildDrafts --watch
 hugo --theme=hugo-nuo --buildDrafts --baseUrl="https://zqHero.github.io/"
 ```
 
+hugo server  -theme=AllinOne --buildDrafts --watch

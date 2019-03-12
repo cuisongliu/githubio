@@ -1,3 +1,48 @@
-baseURL = "http://example.org/"
+baseurl = "https://cuisongliu.github.io"
 languageCode = "en-us"
-title = "My New Hugo Site"
+theme = "hugo-theme-hello-friend"
+paginate = 5
+
+[params]
+  # dir name of your blog content (default is `content/posts`)
+  contentTypeName = "posts"
+  # "light" or "light"
+  defaultTheme = "dark"
+  # if you set this to 0, only submenu trigger will be visible
+  showMenuItems = 2
+  # Show reading time in minutes for posts
+  showReadingTime = true
+
+[languages]
+  [languages.en]
+    title = "cuisongliu的个人博客"
+    subtitle = "专注于Kubernetes技术"
+    keywords = ""
+    copyright = ""
+    menuMore = "更多"
+    writtenBy = "文章作者"
+    readMore = "阅读全文"
+    readOtherPosts = "其他文章"
+    newerPosts = "下一页"
+    olderPosts = "上一页"
+    minuteReadingTime = "分钟之前"
+    dateFormatSingle = "2006-01-02"
+    dateFormatList = "2006-01-02"
+
+    [languages.en.params.logo]
+      logoText = "cuisongliu"
+      logoHomeLink = "/"
+    # or
+    #
+    # path = "/img/your-example-logo.svg"
+    # alt = "Your example logo alt text"
+
+    [languages.en.menu]
+      [[languages.en.menu.main]]
+        identifier = "about"
+        name = "关于"
+        url = "/about"
+      #[[languages.en.menu.main]]
+      #  identifier = "showcase"
+      #  name = "Showcase"
+      #  url = "/showcase"
