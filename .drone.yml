@@ -1,0 +1,14 @@
+kind: pipeline
+name: default
+
+
+steps:
+- name: build-font
+  image: golang:1.10.8
+  commands:
+    - go get -v
+    - go get -u github.com/gohugoio/hugo
+    - mkdir -p themes
+    - cd themes
+    - git clone https://github.com/kakawait/hugo-tranquilpeak-theme.git
+    - cd ../

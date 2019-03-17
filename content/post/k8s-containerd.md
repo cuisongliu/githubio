@@ -1,10 +1,24 @@
-+++
-title = "containerd与kubernetes集成"
-date = "2019-03-12"
-author = "cuisongliu"
-cover = "img/k8s-containerd/cri.png"
-description = "containerd与kubernetes集成"
-+++
+---
+title: containerd与kubernetes集成
+slug: chinese-test
+date: 2019-03-12
+categories:
+- kubernetes
+tags:
+- kubernetes
+- containerd
+autoThumbnailImage: true
+thumbnailImagePosition: "top"
+metaAlignment: center
+thumbnailImage: img/k8s-containerd/containerd-color.png
+
+---
+本文主要讲解如何将kubernetes中的docker替换为containerd。并讲解关于容器相关的基础概念。
+以及相关部署配置说明。<br/>
+由于docker嵌入了太多自身内容,为了减轻容器负担。此次选用containerd作为kubernetes的容器实现方案。本文将带大家讲述如何搭建一个集成了containerd的k8s集群。
+<!--more-->
+
+<!-- toc -->
 
 > [kubernetes集群三步安装](https://sealyun.com/pro/products/)
 
@@ -13,7 +27,7 @@ description = "containerd与kubernetes集成"
 - cri (Container runtime interface)
   - `cri` is a [containerd](https://containerd.io/) plugin implementation of Kubernetes [container runtime interface (CRI)](https://github.com/kubernetes/kubernetes/blob/master/pkg/kubelet/apis/cri/runtime/v1alpha2/api.proto).
   - cri是 kubernetes的容器运行时接口的容器插件实现。
-  - ![CRI](https://gogs.cuisongliu.com/cuisongliu/cuisongliu-github/raw/master/static/img/k8s-containerd/cri.png)
+  - ![CRI](/img/k8s-containerd/cri.png)
 - containerd
   - containerd is an industry-standard container runtime with an emphasis on simplicity, robustness and portability.
   - containerd完全支持运行容器的的CRI运行时规范。
@@ -34,10 +48,6 @@ description = "containerd与kubernetes集成"
 
   ![kubelet](https://gogs.cuisongliu.com/cuisongliu/cuisongliu-github/raw/master/static/img/k8s-containerd/kubelet.png)
 
-## 概述
-
-由于docker嵌入了太多自身内容,为了减轻容器负担。此次选用containerd作为kubernetes的容器实现方案。本文将带大家讲述如何搭建一个集成了containerd的k8s集群。
-
 ## 环境准备
 
 下载containerd二进制包。我这里已经编译并打包了好了，内含containerd、runc、crictl、ctr等。
@@ -56,6 +66,7 @@ description = "containerd与kubernetes集成"
   ```shell
   tar -C /usr/local/bin -xzf containerd-v1.2.4.tar.gz
   chmod a+x /usr/local/bin/*
+  mkdir -p /etc/containerd
   containerd config default > /etc/containerd/config.toml
   ```
 
@@ -161,11 +172,11 @@ description = "containerd与kubernetes集成"
 - 在kubeadm配置文件 kubeadm.yaml 中加入
 
   ```yaml
-  apiVersion: kubeadm.k8s.io/v1beta1
-  kind: InitConfiguration
-  nodeRegistration:
-    criSocket: /run/containerd/containerd.sock
-    name: containerd
+   apiVersion: kubeadm.k8s.io/v1beta1
+   kind: InitConfiguration
+   nodeRegistration:
+      criSocket: /run/containerd/containerd.sock
+      name: containerd
   ```
 
 
