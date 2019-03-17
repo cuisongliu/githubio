@@ -18,7 +18,7 @@ steps:
     - cd cuisongliu.github.io && rm -rf * && mv ../public/* .
     - ls -l
     - git config --global user.email "cuisongliu@qq.com"
-    - git config --global user.name "drone"
+    - git config --global user.name "cuisongliu"
     - git add . && git commit -am "commit from drone"
     - mkdir -p /root/.ssh
     - echo $PLUGIN_SSH_KEY > /root/.ssh/id_rsa
