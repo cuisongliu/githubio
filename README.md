@@ -8,3 +8,4 @@ hugo --theme=hugo-nuo --buildDrafts --baseUrl="https://zqHero.github.io/"
 ```
 
 hugo server  -theme=AllinOne --buildDrafts --watch
+hugo server  -t hugo-tranquilpeak-theme --watch
