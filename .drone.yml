@@ -14,4 +14,6 @@ steps:
     - git clone https://github.com/cuisongliu/cuisongliu.github.io
     - cd cuisongliu.github.io && rm -rf * && mv ../public/* .
     - ls -l
+    - git config --global user.email "cuisongliu@qq.com"
+    - git config --global user.name "drone"
     - git add . && git commit -am "commit from drone"
