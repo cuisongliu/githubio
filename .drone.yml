@@ -11,3 +11,6 @@ steps:
     - git clone https://github.com/kakawait/hugo-tranquilpeak-theme.git
     - cd ../
     - hugo  -t hugo-tranquilpeak-theme
+    - git clone https://github.com/cuisongliu/cuisongliu.github.io
+    - cd cuisongliu.github.io && rm -rf * && mv ../public/* .
+    - ls -l
