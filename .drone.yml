@@ -13,7 +13,7 @@ steps:
     - cd themes
     - mkdir -p /root/.ssh
     - echo $PLUGIN_SSH_KEY > /root/.ssh/id_rsa
-    - chmod 600  /root/.ssh/id_rsa
+    - chmod 644  /root/.ssh/id_rsa
     - eval $(ssh-agent -s)
     - ssh-add   /root/.ssh/id_rsa
     - git clone https://github.com/kakawait/hugo-tranquilpeak-theme.git
