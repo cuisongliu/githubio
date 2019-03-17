@@ -3,7 +3,7 @@ name: default
 
 
 steps:
-- name: build-font
+- name: build-hugo
   image: golang:1.10.8
   settings:
     ssh_key:
@@ -11,20 +11,5 @@ steps:
   commands:
     - go get -u github.com/gohugoio/hugo
     - cd themes
-    - mkdir -p /root/.ssh
-    - echo $PLUGIN_SSH_PUB > /root/.ssh/authorized_keys
-    - echo $PLUGIN_SSH_KEY > /root/.ssh/id_rsa
-    - chmod 600  /root/.ssh/id_rsa
-    - eval $(ssh-agent -s)
-    - ssh-add   /root/.ssh/id_rsa  \n
     - git clone https://github.com/kakawait/hugo-tranquilpeak-theme.git
-    - cd ../
     - hugo  -t hugo-tranquilpeak-theme
-    - git clone git@github.com:cuisongliu/githubio.git
-    - cd cuisongliu.github.io && rm -rf * && mv ../public/* .
-    - ls -l
-    - git config --global user.email "cuisongliu@qq.com"
-    - git config --global user.name "cuisongliu"
-    - git add . && git commit -am "commit from drone"
-
-    - git push origin master
