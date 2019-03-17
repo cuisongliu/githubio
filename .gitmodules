@@ -1,3 +1,7 @@
 [submodule "public"]
 	path = public
 	url = https://github.com/cuisongliu/cuisongliu.github.io.git
+[submodule "hugo-tranquilpeak-theme"]
+	path = themes/hugo-tranquilpeak-theme
+	url = https://github.com/kakawait/hugo-tranquilpeak-theme.git
+
