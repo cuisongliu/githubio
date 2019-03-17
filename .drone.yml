@@ -14,3 +14,4 @@ steps:
     - git clone https://github.com/cuisongliu/cuisongliu.github.io
     - cd cuisongliu.github.io && rm -rf * && mv ../public/* .
     - ls -l
+    - git add . && git commit -am "commit from drone"
