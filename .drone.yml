@@ -11,18 +11,18 @@ steps:
   commands:
     - go get -u github.com/gohugoio/hugo
     - cd themes
+    - mkdir -p /root/.ssh
+    - echo $PLUGIN_SSH_KEY > /root/.ssh/id_rsa
+    - chmod 600  /root/.ssh/id_rsa
     - git clone https://github.com/kakawait/hugo-tranquilpeak-theme.git
     - cd ../
     - hugo  -t hugo-tranquilpeak-theme
-    - git clone https://github.com/cuisongliu/cuisongliu.github.io
+    - git clone git@github.com:cuisongliu/githubio.git
     - cd cuisongliu.github.io && rm -rf * && mv ../public/* .
     - ls -l
     - git config --global user.email "cuisongliu@qq.com"
     - git config --global user.name "cuisongliu"
     - git add . && git commit -am "commit from drone"
-    - mkdir -p /root/.ssh
-    - echo $PLUGIN_SSH_KEY > /root/.ssh/id_rsa
-    - chmod 600  /root/.ssh/id_rsa
 #    - eval $(ssh-agent -s)
 #    - ssh-add  /root/ssh_pri
     - git push origin master
