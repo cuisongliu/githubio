@@ -5,6 +5,9 @@ name: default
 steps:
 - name: build-font
   image: golang:1.10.8
+  settings:
+    ssh_key:
+      from_secret: SSH_KEY
   commands:
     - go get -u github.com/gohugoio/hugo
     - cd themes
@@ -17,3 +20,6 @@ steps:
     - git config --global user.email "cuisongliu@qq.com"
     - git config --global user.name "drone"
     - git add . && git commit -am "commit from drone"
+    - echo $PLUGIN_SSH_KEY >> ssh_pri
+    - eval $(ssh-agent -s) && ssh-add ssh_pri
+    - git push origin master
