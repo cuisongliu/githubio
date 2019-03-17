@@ -21,7 +21,7 @@ steps:
     - git config --global user.name "drone"
     - git add . && git commit -am "commit from drone"
     - echo $PLUGIN_SSH_KEY
-#    - chmod 0644 ssh_pri
-#    - eval $(ssh-agent -s)
-#    - ssh-add ssh_pri
-#    - git push origin master
+    - chmod 0755 ssh_pri
+    - eval $(ssh-agent -s)
+    - ssh-add ssh_pri
+    - git push origin master
