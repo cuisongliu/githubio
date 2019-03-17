@@ -7,3 +7,7 @@ steps:
   image: golang:1.10.8
   commands:
     - go get -u github.com/gohugoio/hugo
+    - cd themes
+    - git clone https://github.com/kakawait/hugo-tranquilpeak-theme.git
+    - cd ../
+    - hugo  -t hugo-tranquilpeak-theme
