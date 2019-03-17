@@ -8,7 +8,3 @@ steps:
   commands:
     - go get -v
     - go get -u github.com/gohugoio/hugo
-    - mkdir -p themes
-    - cd themes
-    - git clone https://github.com/kakawait/hugo-tranquilpeak-theme.git
-    - cd ../
