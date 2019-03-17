@@ -6,5 +6,4 @@ steps:
 - name: build-font
   image: golang:1.10.8
   commands:
-    - go get -v
     - go get -u github.com/gohugoio/hugo
