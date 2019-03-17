@@ -10,9 +10,14 @@ steps:
       from_secret: SSH_KEY
   commands:
     - go get -u github.com/gohugoio/hugo
-    - cd themes
-    - git clone https://github.com/kakawait/hugo-tranquilpeak-theme.git
+    - git clone https://github.com/kakawait/hugo-tranquilpeak-theme.git themes/hugo-tranquilpeak-theme
     - hugo  -t hugo-tranquilpeak-theme
 
-
-
+- name: publish
+  image: plugins/github-release
+  settings:
+    api_key:
+      from_secret: github_token
+    files: public/*
+    upload_url: https://github.com/cuisongliu/cuisongliu.github.io.git
+    base_url: https://github.com/cuisongliu/cuisongliu.github.io.git
