@@ -22,6 +22,7 @@ thumbnailImage: img/k8s-containerd/containerd-color.png
 
 > [kubernetes集群三步安装](https://sealyun.com/pro/products/)
 
+
 ## 概念介绍
 
 - cri (Container runtime interface)
@@ -145,7 +146,13 @@ thumbnailImage: img/k8s-containerd/containerd-color.png
 
     到此我们的cri + containerd已经完成整合了。下一步我们需要修改kubeadm配置进行安装。
 
-### 导入kubenetes离线镜像包
+### containerd部署脚本
+
+到此我特意重新整理了部署脚本,包括containerd,ctr,circtl等配置。具体详细配置请移步[containerd-dist](https://github.com/cuisongliu/containerd-dist)
+
+
+
+### 导入kubenetes离线镜像包（kubernetes调整）
 
 > 这里我们就需要导入k8s的离线镜像包了。**这里需要注意一下，kubernetes是调用的cri接口,所以导入时也需要从cri插件导入镜像。**
 
@@ -161,7 +168,7 @@ thumbnailImage: img/k8s-containerd/containerd-color.png
    ctr images import images.tar 
   ```
 
-### 修改kubelet配置和kubeadm安装时配置
+### 修改kubelet配置和kubeadm安装时配置（kubernetes调整）
 
 - 在 kubelet配置文件 10-kubeadm.conf 的`[Service]` 结点加入以下配置：
 
@@ -181,3 +188,4 @@ thumbnailImage: img/k8s-containerd/containerd-color.png
 
 
   到此containerd和kubernetes的集成就完成了。下面可以直接安装即可。
+  

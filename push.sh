@@ -8,7 +8,11 @@ cd cuisongliu.github.io
 rm -rf *
 cp -rf ../public/* .
 git add .
-git commit -am "shell commit"
+git commit -am "auto shell commit by hugo"
 git push   origin master
 cd ../
 rm -rf cuisongliu.github.io
+
+git add .
+git commit -am "auto shell commit by hugo"
+git push   origin master
