@@ -1,6 +1,6 @@
 ---
 title: containerd与kubernetes集成
-slug: kubernetes-containerd
+slug: kubernetes/containerd
 date: 2019-03-12
 categories:
 - kubernetes
@@ -9,8 +9,6 @@ tags:
 - containerd
 autoThumbnailImage: true
 thumbnailImagePosition: "top"
-metaAlignment: center
-thumbnailImage: img/k8s-containerd/containerd-color.png
 
 ---
 本文主要讲解如何将kubernetes中的docker替换为containerd。并讲解关于容器相关的基础概念。

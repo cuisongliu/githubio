@@ -1,6 +1,6 @@
 ---
 title: 利用LXCFS增强容器隔离性和资源可见性
-slug: docker-lxcfs
+slug: docker/lxcfs
 date: 2019-03-22
 categories:
 - docker
@@ -14,6 +14,8 @@ metaAlignment: center
 ---
 本文主要讲解如何使用lxcfs增强容器的隔离性和可见性。并使用二进制部署包使用，减轻部署难度。可在离线环境中使用。
 <!--more-->
+
+> [kubernetes集群三步安装](https://sealyun.com/pro/products/)
 
 {{< alert info >}}
 基于LXCFS增强docker容器隔离性的分析

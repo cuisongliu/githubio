@@ -1,6 +1,6 @@
 ---
 title: 多网卡配置安装kubeadm
-slug: kubernetes-netbrige
+slug: kubernetes/netbrige
 date: 2019-03-22
 categories:
 - kubernetes

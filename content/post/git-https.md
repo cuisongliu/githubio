@@ -1,6 +1,6 @@
 ---
 title: git连接https仓库
-slug: git-https
+slug: git/https
 date: 2019-03-10
 categories:
 - git
