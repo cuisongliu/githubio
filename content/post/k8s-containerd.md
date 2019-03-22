@@ -1,6 +1,6 @@
 ---
 title: containerd与kubernetes集成
-slug: kubernetes
+slug: kubernetes-containerd
 date: 2019-03-12
 categories:
 - kubernetes

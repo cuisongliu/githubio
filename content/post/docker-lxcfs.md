@@ -1,6 +1,6 @@
 ---
 title: 利用LXCFS增强容器隔离性和资源可见性
-slug: docker
+slug: docker-lxcfs
 date: 2019-03-22
 categories:
 - docker
