@@ -1,6 +1,6 @@
 ---
 title: containerd与kubernetes集成
-slug: chinese-test
+slug: kubernetes
 date: 2019-03-12
 categories:
 - kubernetes
@@ -64,56 +64,55 @@ thumbnailImage: img/k8s-containerd/containerd-color.png
 
 - 解压二进制包并生成默认文件
 
-  ```shell
-  tar -C /usr/local/bin -xzf containerd-v1.2.4.tar.gz
-  chmod a+x /usr/local/bin/*
-  mkdir -p /etc/containerd
-  containerd config default > /etc/containerd/config.toml
-  ```
-
-    生成的默认配置文件注意  `[grpc]` 的 `address`  字段默认为 `/run/containerd/containerd.sock`  
-
+    {{< codeblock  "bash" >}}
+tar -C /usr/local/bin -xzf containerd-v1.2.4.tar.gz
+chmod a+x /usr/local/bin/*
+mkdir -p /etc/containerd
+containerd config default > /etc/containerd/config.toml
+    {{< /codeblock >}}
+    {{< alert warning >}}
+生成的默认配置文件注意  [grpc] 的 address 字段默认为 /run/containerd/containerd.sock
+    {{</ alert >}}
     配置文件其他参数含义参照github地址： [containerd-config.md](https://github.com/containerd/containerd/blob/master/docs/man/containerd-config.toml.5.md)
 
 - 在  `/etc/systemd/system` 目录下编写文件  `containerd.service`内容如下:
+    
+    {{< codeblock  "containerd.service" >}}
+[Unit]
+Description=containerd container runtime
+Documentation=https://containerd.io
+After=network.target
 
-  ```
-  [Unit]
-  Description=containerd container runtime
-  Documentation=https://containerd.io
-  After=network.target
-  
-  [Service]
-  ExecStartPre=/sbin/modprobe overlay
-  ExecStart=/usr/local/bin/containerd
-  Restart=always
-  RestartSec=5
-  Delegate=yes
-  KillMode=process
-  OOMScoreAdjust=-999
-  LimitNOFILE=1048576
-  LimitNPROC=infinity
-  LimitCORE=infinity
-  
-  [Install]
-  WantedBy=multi-user.target
-  ```
+[Service]
+ExecStartPre=/sbin/modprobe overlay
+ExecStart=/usr/local/bin/containerd
+Restart=always
+RestartSec=5
+Delegate=yes
+KillMode=process
+OOMScoreAdjust=-999
+LimitNOFILE=1048576
+LimitNPROC=infinity
+LimitCORE=infinity
+
+[Install]
+WantedBy=multi-user.target
+    {{< /codeblock >}}
 
 - 启动containerd
 
-  ```shell
-  systemctl enable containerd
-  systemctl restart containerd
-  systemctl status containerd
-  ```
+    {{< codeblock  "bash" >}}
+systemctl enable containerd
+systemctl restart containerd
+systemctl status containerd
+    {{< /codeblock >}}
 
     看containerd启动状态如果是running就没有问题。下面我们测试拉取一下hub的镜像。
 
 - 测试containerd
-
-  ```
-  ctr images pull docker.io/library/nginx:alpine
-  ```
+    {{< codeblock  "bash" >}}
+ctr images pull docker.io/library/nginx:alpine
+    {{< /codeblock >}}
 
     看到输出done，说明containerd运行一切正常。
 
@@ -125,36 +124,36 @@ thumbnailImage: img/k8s-containerd/containerd-color.png
 
 - 修改crictl的配置文件,在  `/etc/crictl.yaml` 写入以下内容：
 
-  ```shell
-  runtime-endpoint: unix:///run/containerd/containerd.sock
-  image-endpoint: unix:///run/containerd/containerd.sock
-  timeout: 10
-  debug: false
-  ```
+    {{< codeblock  "yaml`" >}}
+runtime-endpoint: unix:///run/containerd/containerd.sock
+image-endpoint: unix:///run/containerd/containerd.sock
+timeout: 10
+debug: false
+    {{< /codeblock >}}
 
     这里注意runtime-endpoint 和image-endpoint 必须与/etc/containerd/config.toml中配置保持一致。
 
 - 验证一下cri插件是否可用
 
-  ```shell
-  crictl  pull nginx:alpine
-  crictl  rmi  nginx:alpine
-  crictl  images
-  ```
-
+    {{< codeblock  "bash" >}}
+crictl  pull nginx:alpine
+crictl  rmi  nginx:alpine
+crictl  images
+    {{< /codeblock >}}
     其中   `crictl  images`  会列出所有的cri容器镜像。
 
     到此我们的cri + containerd已经完成整合了。下一步我们需要修改kubeadm配置进行安装。
 
 ### containerd部署脚本
-
+{{< alert success >}}
 到此我特意重新整理了部署脚本,包括containerd,ctr,circtl等配置。具体详细配置请移步[containerd-dist](https://github.com/cuisongliu/containerd-dist)
-
+{{< /alert >}}
 
 
 ### 导入kubenetes离线镜像包（kubernetes调整）
-
-> 这里我们就需要导入k8s的离线镜像包了。**这里需要注意一下，kubernetes是调用的cri接口,所以导入时也需要从cri插件导入镜像。**
+{{< alert danger >}}
+这里我们就需要导入k8s的离线镜像包了。**这里需要注意一下，kubernetes是调用的cri接口,所以导入时也需要从cri插件导入镜像。**
+{{< /alert >}}
 
 - cri导入镜像命令(cri导入镜像)：
 
@@ -172,19 +171,19 @@ thumbnailImage: img/k8s-containerd/containerd-color.png
 
 - 在 kubelet配置文件 10-kubeadm.conf 的`[Service]` 结点加入以下配置：
 
-  ```
+    {{< codeblock  "conf" >}}
   Environment="KUBELET_EXTRA_ARGS=--container-runtime=remote --runtime-request-timeout=15m --container-runtime-endpoint=unix:///run/containerd/containerd.sock"
-  ```
+    {{</ codeblock>}}
 
 - 在kubeadm配置文件 kubeadm.yaml 中加入
 
-  ```yaml
-   apiVersion: kubeadm.k8s.io/v1beta1
-   kind: InitConfiguration
-   nodeRegistration:
-      criSocket: /run/containerd/containerd.sock
-      name: containerd
-  ```
+    {{< codeblock  "yaml" >}}
+apiVersion: kubeadm.k8s.io/v1beta1
+kind: InitConfiguration
+nodeRegistration:
+  criSocket: /run/containerd/containerd.sock
+  name: containerd
+    {{</ codeblock>}}
 
 
   到此containerd和kubernetes的集成就完成了。下面可以直接安装即可。
