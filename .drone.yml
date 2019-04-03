@@ -16,6 +16,7 @@ steps:
   - name: build-hugo
     image: golang:1.11
     commands:
+      - ls -l themes/hugo-tranquilpeak-theme
       - go get -u github.com/gohugoio/hugo
       - hugo   -t hugo-tranquilpeak-theme
   - name: publish
