@@ -28,8 +28,7 @@ steps:
       - git add .
       - git commit -am "auto shell commit by hugo for drone"
       - env
-      - echo "machine github.com" >> ~/.netrc
-      - echo "login $PLUGIN_USERNAME" >> ~/.netrc
-      - echo "passowrd $PLUGIN_PASSWORD" >> ~/.netrc
+      - echo "https://$PLUGIN_USERNAME:$PLUGIN_PASSWORD@github.com" >>  ~/.git-credentials
+      - git config --global credential.helper store
       - git push   origin master
 
