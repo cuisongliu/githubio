@@ -7,7 +7,7 @@ workspace:
 
 steps:
   - name: build-hugo
-    image: golang:1.10
+    image: golang:1.11
     commands:
       - go get -u github.com/gohugoio/hugo
       - git clone https://github.com/kakawait/hugo-tranquilpeak-theme.git themes/hugo-tranquilpeak-theme
