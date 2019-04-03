@@ -18,6 +18,8 @@ steps:
       - hugo  -t hugo-tranquilpeak-theme
       - cd dist && rm -rf *
       - cp -rf ../public/* .
+      - git config --global user.email "drone@cuisongliu.com"
+      - git config --global user.name "drone"
       - git add .
       - git commit -am "auto shell commit by hugo for drone"
   - name: publish
