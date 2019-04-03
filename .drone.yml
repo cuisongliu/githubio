@@ -1,0 +1,8 @@
+kind: pipeline
+name: default
+
+workspace:
+  base: /githubio
+  path: src/github.com/cuisongliu/githubio
+
+
