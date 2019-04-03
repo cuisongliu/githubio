@@ -5,16 +5,21 @@ workspace:
   base: /go
   path: src/github.com/cuisongliu/githubio
 
+clone:
+  depth: 50
+
 steps:
+  - name: submodules
+    image: docker:git
+    commands:
+      - git submodule update --recursive --remote
   - name: build-hugo
     image: golang:1.11
     commands:
       - go get -u github.com/gohugoio/hugo
-      - git clone https://github.com/kakawait/hugo-tranquilpeak-theme.git themes/hugo-tranquilpeak-theme
       - hugo   -t hugo-tranquilpeak-theme
-      - git clone git@github.com:cuisongliu/cuisongliu.github.io.git
   - name: publish
     image: plugins/gh-pages
     commands:
-      - ls -l cuisongliu.github.io
+      - ls -l dist
       - ls -l
