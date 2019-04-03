@@ -1,15 +1,16 @@
 kind: pipeline
 name: default
 
-workspace:
-  base: /go
-  path: src/github.com/cuisongliu/githubio
+#workspace:
+#  base: /go
+#  path: src/github.com/cuisongliu/githubio
 
 steps:
   - name: submodules
     image: docker:git
     commands:
-      - ls -l
+      - git clone --recursive https://github.com/cuisongliu/githubio.git /go/githubio
+      - cd /go/githubio
       - git submodule update --recursive --remote
   - name: build-hugo
     image: golang:1.11
