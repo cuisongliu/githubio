@@ -13,3 +13,4 @@ steps:
       password: p455w0rd
   commands:
     - ls -l dist
+    - ls -l
