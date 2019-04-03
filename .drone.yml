@@ -30,3 +30,5 @@ steps:
       password:
         from_secret: github_password
       pages_directory: dist/
+    environment:
+      DRONE_REMOTE_URL: https://github.com/cuisongliu/cuisongliu.github.io.git
