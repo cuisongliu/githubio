@@ -12,6 +12,11 @@ steps:
       - git clone --recursive https://github.com/cuisongliu/githubio.git
   - name: build-hugo
     image: golang:1.11
+    settings:
+      username:
+        from_secret: github_username
+      password:
+        from_secret: github_password
     commands:
       - cd /go/githubio
       - go get -u github.com/gohugoio/hugo
@@ -22,13 +27,8 @@ steps:
       - git config --global user.name "drone"
       - git add .
       - git commit -am "auto shell commit by hugo for drone"
-  - name: publish
-    image: plugins/gh-pages
-    settings:
-      username:
-        from_secret: github_username
-      password:
-        from_secret: github_password
-      pages_directory: dist/
-    environment:
-      DRONE_REMOTE_URL: https://github.com/cuisongliu/cuisongliu.github.io.git
+      - echo "machine github.com" >> ~/.netrc
+      - echo "login $PLUGIN_USERNAME" >> ~/.netrc
+      - echo "passowrd $PLUGIN_PASSWORD" >> ~/.netrc
+      - git push   origin master
+
