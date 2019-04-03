@@ -14,12 +14,17 @@ steps:
     image: golang:1.11
     commands:
       - cd /go/githubio
-      - ls -l themes/hugo-tranquilpeak-theme
       - go get -u github.com/gohugoio/hugo
-      - hugo   -t hugo-tranquilpeak-theme
+      - hugo  -t hugo-tranquilpeak-theme
+      - cd dist && rm -rf *
+      - cp -rf ../public/* .
+      - git add .
+      - git commit -am "auto shell commit by hugo for drone"
   - name: publish
     image: plugins/gh-pages
-    commands:
-      - cd /go/githubio
-      - ls -l dist
-      - ls -l
+    settings:
+      username:
+        from_secret: github_username
+      password:
+        from_secret: github_password
+      pages_directory: dist/
