@@ -9,19 +9,17 @@ steps:
   - name: submodules
     image: docker:git
     commands:
-      - git clone --recursive https://github.com/cuisongliu/githubio.git /go/githubio
-      - cd /go/githubio
+      - git clone --recursive https://github.com/cuisongliu/githubio.git
+      - cd  githubio
       - git submodule update --recursive --remote
   - name: build-hugo
     image: golang:1.11
     commands:
-      - cd /go/githubio
       - ls -l themes/hugo-tranquilpeak-theme
       - go get -u github.com/gohugoio/hugo
       - hugo   -t hugo-tranquilpeak-theme
   - name: publish
     image: plugins/gh-pages
     commands:
-      - cd /go/githubio
       - ls -l dist
       - ls -l
