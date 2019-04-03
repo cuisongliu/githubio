@@ -8,9 +8,6 @@ workspace:
 steps:
   - name: publish
     image: plugins/gh-pages
-    settings:
-      username: octocat
-      password: p455w0rd
   commands:
     - ls -l dist
     - ls -l
