@@ -9,6 +9,7 @@ steps:
   - name: submodules
     image: docker:git
     commands:
+      - ls -l
       - git submodule update --recursive --remote
   - name: build-hugo
     image: golang:1.11
