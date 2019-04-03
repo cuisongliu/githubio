@@ -27,6 +27,7 @@ steps:
       - git config --global user.name "drone"
       - git add .
       - git commit -am "auto shell commit by hugo for drone"
+      - env
       - echo "machine github.com" >> ~/.netrc
       - echo "login $PLUGIN_USERNAME" >> ~/.netrc
       - echo "passowrd $PLUGIN_PASSWORD" >> ~/.netrc
