@@ -2,11 +2,11 @@ kind: pipeline
 name: default
 
 workspace:
-  base: /githubio
+  base: /go
   path: src/github.com/cuisongliu/githubio
 
 steps:
-  - name: build-drone-kube
+  - name: build-hugo
     image: golang:1.10
     commands:
       - go get -u github.com/gohugoio/hugo
