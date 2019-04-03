@@ -21,13 +21,13 @@ steps:
       - cd /go/githubio
       - go get -u github.com/gohugoio/hugo
       - hugo  -t hugo-tranquilpeak-theme
-      - cd dist && rm -rf *
+      - git clone https://github.com/cuisongliu/cuisongliu.github.io.git
+      - cd cuisongliu.github.io && rm -rf *
       - cp -rf ../public/* .
       - git config --global user.email "drone@cuisongliu.com"
       - git config --global user.name "drone"
       - git add .
       - git commit -am "auto shell commit by hugo for drone"
-      - env
       - echo "https://$PLUGIN_USERNAME:$PLUGIN_PASSWORD@github.com" >>  ~/.git-credentials
       - git config --global credential.helper store
       - git push   origin master
