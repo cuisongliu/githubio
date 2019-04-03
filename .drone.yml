@@ -5,4 +5,11 @@ workspace:
   base: /githubio
   path: src/github.com/cuisongliu/githubio
 
-
+steps:
+  - name: publish
+    image: plugins/gh-pages
+    settings:
+      username: octocat
+      password: p455w0rd
+  commands:
+    - ls -l dist
