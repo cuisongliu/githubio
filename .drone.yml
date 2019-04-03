@@ -15,11 +15,13 @@ steps:
   - name: build-hugo
     image: golang:1.11
     commands:
+      - cd /go/githubio
       - ls -l themes/hugo-tranquilpeak-theme
       - go get -u github.com/gohugoio/hugo
       - hugo   -t hugo-tranquilpeak-theme
   - name: publish
     image: plugins/gh-pages
     commands:
+      - cd /go/githubio
       - ls -l dist
       - ls -l
