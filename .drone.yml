@@ -6,8 +6,15 @@ workspace:
   path: src/github.com/cuisongliu/githubio
 
 steps:
+  - name: build-drone-kube
+    image: golang:1.10
+    commands:
+      - go get -u hugo
+      - git clone https://github.com/kakawait/hugo-tranquilpeak-theme.git themes/hugo-tranquilpeak-theme
+      - hugo   -t hugo-tranquilpeak-theme
+      - git clone git@github.com:cuisongliu/cuisongliu.github.io.git
   - name: publish
     image: plugins/gh-pages
     commands:
-      - ls -l dist
+      - ls -l cuisongliu.github.io
       - ls -l
