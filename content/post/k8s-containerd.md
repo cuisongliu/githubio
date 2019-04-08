@@ -170,7 +170,7 @@ crictl  images
 - 在 kubelet配置文件 10-kubeadm.conf 的`[Service]` 结点加入以下配置：
 
     {{< codeblock  "conf" >}}
-  Environment="KUBELET_EXTRA_ARGS=--container-runtime=remote --runtime-request-timeout=15m --container-runtime-endpoint=unix:///run/containerd/containerd.sock"
+  Environment="KUBELET_EXTRA_ARGS=--container-runtime=remote --runtime-request-timeout=15m --container-runtime-endpoint=unix:///run/containerd/containerd.sock --image-service-endpoint=unix:///run/containerd/containerd.sock"
     {{</ codeblock>}}
 
 - 在kubeadm配置文件 kubeadm.yaml 中加入
