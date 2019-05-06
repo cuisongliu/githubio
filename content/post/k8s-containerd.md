@@ -31,7 +31,7 @@ thumbnailImagePosition: "top"
   - containerd is an industry-standard container runtime with an emphasis on simplicity, robustness and portability.
   - containerd完全支持运行容器的的CRI运行时规范。
   - cri在containerd1.1以上的版本的原生插件。它内置于containerd并默认启用。
-  - ![containerd](https://gogs.cuisongliu.com/cuisongliu/cuisongliu-github/raw/master/static/img/k8s-containerd/containerd.png)
+  - ![containerd](/img/k8s-containerd/containerd.png)
 
 - cri-o
   - OCI-based implementation of Kubernetes Container Runtime Interface.
@@ -45,7 +45,7 @@ thumbnailImagePosition: "top"
   - `runc` is a CLI tool for spawning and running containers according to the OCI specification.
   - runc，是对于OCI标准的一个参考实现，是一个可以用于创建和运行容器的CLI(command-line interface)工具。
 
-  ![kubelet](https://gogs.cuisongliu.com/cuisongliu/cuisongliu-github/raw/master/static/img/k8s-containerd/kubelet.png)
+  ![kubelet](/img/k8s-containerd/kubelet.png)
 
 ## 环境准备
 
