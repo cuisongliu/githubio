@@ -1,7 +1,7 @@
 ---
 title: 修复springboot下存redis乱码问题
 slug: springboot/redis
-date: 2019-05-15
+date: 2019-05-10
 categories:
 - springboot
 - redis
@@ -15,7 +15,7 @@ metaAlignment: center
 本文主要讲解如何修复springboot下存储redis乱码问题。
 <!--more-->
 
-{{< codeblock  "java" >}}
+{{< codeblock  "CacheConfiguration.java" >}}
 @Bean
 public RedisTemplate<String, String> redisTemplate(RedisConnectionFactory factory) {
     StringRedisTemplate template = new StringRedisTemplate(factory);
