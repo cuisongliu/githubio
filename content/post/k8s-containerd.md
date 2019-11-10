@@ -21,7 +21,7 @@ thumbnailImagePosition: "top"
 > [kubernetes集群三步安装](https://sealyun.com/pro/products/)
 
 
-## 概念介绍
+# 概念介绍
 
 - cri (Container runtime interface)
   - `cri` is a [containerd](https://containerd.io/) plugin implementation of Kubernetes [container runtime interface (CRI)](https://github.com/kubernetes/kubernetes/blob/master/pkg/kubelet/apis/cri/runtime/v1alpha2/api.proto).
@@ -47,7 +47,7 @@ thumbnailImagePosition: "top"
 
   ![kubelet](/img/k8s-containerd/kubelet.png)
 
-## 环境准备
+# 环境准备
 
 下载containerd二进制包。我这里已经编译并打包了好了，内含containerd、runc、crictl、ctr等。
 
@@ -56,9 +56,9 @@ thumbnailImagePosition: "top"
 - runc版本：  1.0.1-dev
 - containerd版本： v1.2.4
 
-## 安装
+# 安装
 
-### 安装containerd
+## 安装containerd
 
 - 解压二进制包并生成默认文件
 
@@ -74,7 +74,7 @@ containerd config default > /etc/containerd/config.toml
     配置文件其他参数含义参照github地址： [containerd-config.md](https://github.com/containerd/containerd/blob/master/docs/man/containerd-config.toml.5.md)
 
 - 在  `/etc/systemd/system` 目录下编写文件  `containerd.service`内容如下:
-    
+  
     {{< codeblock  "containerd.service" >}}
 [Unit]
 Description=containerd container runtime
@@ -114,7 +114,7 @@ ctr images pull docker.io/library/nginx:alpine
 
     看到输出done，说明containerd运行一切正常。
 
-### 使用crictl连接containerd
+## 使用crictl连接containerd
 
 
 >  下一步我们使用crictl连接containerd。
@@ -142,13 +142,13 @@ crictl  images
 
     到此我们的cri + containerd已经完成整合了。下一步我们需要修改kubeadm配置进行安装。
 
-### containerd部署脚本
+## containerd部署脚本
 {{< alert success >}}
 到此我特意重新整理了部署脚本,包括containerd,ctr,circtl等配置。具体详细配置请移步[containerd-dist](https://github.com/cuisongliu/containerd-dist)
 {{< /alert >}}
 
 
-### 导入kubenetes离线镜像包（kubernetes调整）
+## 导入kubenetes离线镜像包（kubernetes调整）
 {{< alert danger >}}
 这里我们就需要导入k8s的离线镜像包了。**这里需要注意一下，kubernetes是调用的cri接口,所以导入时也需要从cri插件导入镜像。**
 {{< /alert >}}
@@ -165,12 +165,12 @@ crictl  images
    ctr images import images.tar 
   ```
 
-### 修改kubelet配置和kubeadm安装时配置（kubernetes调整）
+## 修改kubelet配置和kubeadm安装时配置（kubernetes调整）
 
 - 在 kubelet配置文件 10-kubeadm.conf 的`[Service]` 结点加入以下配置：
 
     {{< codeblock  "conf" >}}
-  Environment="KUBELET_EXTRA_ARGS=--container-runtime=remote --runtime-request-timeout=15m --container-runtime-endpoint=unix:///run/containerd/containerd.sock --image-service-endpoint=unix:///run/containerd/containerd.sock"
+    Environment="KUBELET_EXTRA_ARGS=--container-runtime=remote --runtime-request-timeout=15m --container-runtime-endpoint=unix:///run/containerd/containerd.sock --image-service-endpoint=unix:///run/containerd/containerd.sock"
     {{</ codeblock>}}
 
 - 在kubeadm配置文件 kubeadm.yaml 中加入
@@ -179,10 +179,10 @@ crictl  images
 apiVersion: kubeadm.k8s.io/v1beta1
 kind: InitConfiguration
 nodeRegistration:
-  criSocket: /run/containerd/containerd.sock
-  name: containerd
+    criSocket: /run/containerd/containerd.sock
+    name: containerd
     {{</ codeblock>}}
 
 
   到此containerd和kubernetes的集成就完成了。下面可以直接安装即可。
-  
+

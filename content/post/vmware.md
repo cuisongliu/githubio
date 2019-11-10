@@ -19,9 +19,9 @@ metaAlignment: center
 
 > [kubernetes集群三步安装](https://sealyun.com/pro/products/)
 
-## 网卡介绍
+# 网卡介绍
 
-### NAT
+## NAT
 {{< alert success >}}
 网络地址转换,相当于从主机网络中虚拟出一块网卡作为虚拟机的网卡进行上网。
 {{< /alert >}}
@@ -36,7 +36,7 @@ metaAlignment: center
 3. 虚拟机可访问主机但是主机不能访问虚拟机
 4. 虚拟机使用的网卡是虚拟的并非实际网卡
 
-### bridged
+## bridged
 {{< alert success >}}
 桥接网卡,共享主机的物理网卡,ip必须与物理网卡相同网段,与主机存在于相同的网段。
 {{< /alert >}}
@@ -51,7 +51,7 @@ metaAlignment: center
 3. 虚拟机与宿主机均可互相访问
 4. 虚拟机使用的网卡是共享的主机网卡,存在于真实的网络环境中
 
-### host-only
+## host-only
 {{< alert success >}}
 仅主机网卡,顾名思义只能与主机互联,单独虚拟的网卡可以自建网段。
 {{< /alert >}}
@@ -66,21 +66,21 @@ metaAlignment: center
 3. 虚拟机与宿主机均可互相访问
 4. 虚拟机使用的网卡是用户自建网卡,只存在于内网的网络环境中
 
-## 双网卡设置(nat+hostonly)
+# 双网卡设置(nat+hostonly)
 
 {{< alert success >}}
 在 VMware -> edit -> Virtual Network Editor 设置网络配置
 {{< /alert >}}
 
-### 设置nat网卡
+## 设置nat网卡
 
 {{< image classes="fancybox right clear" src="/img/vm/nat.png"  title="nat的设置" >}}
 
-### 设置hostonly网卡
+## 设置hostonly网卡
 
 {{< image classes="fancybox right clear" src="/img/vm/hostonly.png"  title="hostonly的设置" >}}
 
-### 虚拟机设置双网卡
+## 虚拟机设置双网卡
 
 {{< alert success >}}
 虚拟机中设置一张nat网卡一张hostonly网卡,我这里hostonly设置的是172.16.4.0的网段

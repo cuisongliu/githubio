@@ -20,7 +20,7 @@ showPagination: false
 在Debian等操作系统使用git clone 经常出现```error: gnutls_handshake() failed: A TLS packet with unexpected length was received``` 错误。
 {{< /alert >}}
 
-### 使用http克隆仓库
+# 使用http克隆仓库
 
 {{< codeblock  "bash" >}}
 #!/bin/bash
@@ -28,7 +28,7 @@ git clone http://github.com/cuisongliu/xxx
 {{< /codeblock >}}
 
 
-### 使用git源码重新编译
+# 使用git源码重新编译
 
 {{< codeblock  "bash" >}}
 #!/bin/bash

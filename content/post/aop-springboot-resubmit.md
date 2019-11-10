@@ -16,7 +16,9 @@ metaAlignment: center
 本文主要说明使用aspect+redis实现重复提交的校验。
 <!--more-->
 
-### 注解声明
+<!-- toc -->
+
+# 注解声明
 
 {{< codeblock  "Resubmit.java" >}}
 @Target({ElementType.METHOD})
@@ -37,7 +39,7 @@ public @interface Resubmit {
 }
 {{< /codeblock >}}
 
-### 切面设计
+# 切面设计
 
 {{< codeblock  "ResubmitAspect.java" >}}
 @Aspect
@@ -51,9 +53,9 @@ public class ResubmitAspect {
     @Pointcut("@annotation(Resubmit)")
     public void pointcut() {
     }
-
+    
     private static final String prefix = ":resubmit:";
-
+    
     @Around(value = "pointcut()")
     public Object around(ProceedingJoinPoint pjp) throws Throwable {
         Resubmit resubmit = getResubmitAnn(pjp);
@@ -68,7 +70,7 @@ public class ResubmitAspect {
         }
         return obj;
     }
-
+    
     private Boolean getExcelRedis(String cacheKey) {
         Optional<Object> excelFlag = cacheService.get(prefix + cacheKey);
         Object excel = excelFlag.orElse(null);
@@ -81,11 +83,11 @@ public class ResubmitAspect {
         }
         return returnExcel;
     }
-
+    
     private void setExcelRedis(String cacheKey, Long timeOut) {
         cacheService.put(prefix + cacheKey, true, timeOut, TimeUnit.SECONDS);
     }
-
+    
     private Resubmit getResubmitAnn(ProceedingJoinPoint joinPoint)
             throws Exception {
         String targetName = joinPoint.getTarget().getClass().getName();

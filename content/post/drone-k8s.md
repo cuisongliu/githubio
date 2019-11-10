@@ -15,6 +15,7 @@ metaAlignment: center
 ---
 主要讲述如果使用github和drone进行代码环境下的ci/cd环境。
 <!--more-->
+<!-- toc -->
 
 > [kubernetes集群三步安装](https://sealyun.com/pro/products/)
 
@@ -26,7 +27,7 @@ https://sealyun.com/post/ci-cd/
 直接进入主题,主要使用[drone-kube](https://github.com/cuisongliu/drone-kube)插件进行drone的k8s部署。
 该插件主要包括两大功能,初始化kubeconfig文件和渲染部署k8s相关文件。
 
-### kubeconfig文件渲染
+# kubeconfig文件渲染
 
 {{< alert warning >}}
 使用命令模式drone-kube config进行kubeconfig文件渲染管理员文件,使用命令模式drone-kube configToken进行kubeconfig文件渲染用户token管理文件。
@@ -80,7 +81,7 @@ https://sealyun.com/post/ci-cd/
     - kubectl create -f deploy/deploy.yaml || true
 {{< /codeblock >}}
 
-### 部署文件模板渲染
+# 部署文件模板渲染
 
 {{< alert warning >}}
 1. 编写部署模板文件,必须以yaml.tmpl或者yml.tmpl为文件结尾。其中变量名称需要为TEMPLATE开头且必须为大写如TEMPLATE_TAG1。
