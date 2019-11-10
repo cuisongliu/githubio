@@ -33,7 +33,7 @@ https://sealyun.com/post/ci-cd/
 使用命令模式drone-kube config进行kubeconfig文件渲染管理员文件,使用命令模式drone-kube configToken进行kubeconfig文件渲染用户token管理文件。
 {{< /alert >}}
 
-#### 管理员模式
+## 管理员模式
 
 {{< alert info >}}
 该模式为最常见的kubernetes-admin管理方式。
@@ -58,7 +58,7 @@ https://sealyun.com/post/ci-cd/
     - kubectl create -f deploy/deploy.yaml || true
 {{< /codeblock >}}
 
-#### 多租户模式
+## 多租户模式
 
 {{< alert info >}}
 该模式为kubernetes下发user-token的模式。
