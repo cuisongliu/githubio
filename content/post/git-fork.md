@@ -61,4 +61,4 @@ showPagination: false
 - 使用pull request流程同步代码
   - 进入源仓库地址<https://github.com/fanux/sealos/pulls> 可以新建同步pr。目标地址为开发项目的base代码库以及分支。![PR](/img/git/pr1.png)
 - merge代码到新分支代码
-  - merge同步之后的base代码分支的代码到新分支代码。
+  - 同步之后的base代码分支的代码需要merge到新分支代码。
