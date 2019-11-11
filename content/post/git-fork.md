@@ -1,5 +1,5 @@
 ---
-title: github提交流程（未完成）
+title: github提交流程
 slug: git/commit
 date: 2019-11-10
 categories:
@@ -58,3 +58,7 @@ showPagination: false
 
 # 同步代码流程
 
+- 使用pull request流程同步代码
+  - 进入源仓库地址<https://github.com/fanux/sealos/pulls> 可以新建同步pr。目标地址为开发项目的base代码库以及分支。![PR](/img/git/pr1.png)
+- merge代码到新分支代码
+  - merge同步之后的base代码分支的代码到新分支代码。
