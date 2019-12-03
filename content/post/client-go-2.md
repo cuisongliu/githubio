@@ -1,6 +1,6 @@
 ---
 title: client-go深入实践
-slug: kubernetes/client-go
+slug: kubernetes/client-go-2
 date: 2019-12-01
 categories:
 - kubernetes
