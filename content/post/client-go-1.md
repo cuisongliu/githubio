@@ -1,6 +1,6 @@
 ---
 title: client-go原理
-slug: kubernetes/client-go
+slug: kubernetes/client-go-1
 date: 2019-12-01
 categories:
 - kubernetes
