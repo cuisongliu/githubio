@@ -3,8 +3,8 @@ title: 利用drone构建ci/cd系统，对接k8s
 slug: drone/k8s
 date: 2019-04-03
 categories:
-- drone
 - kubernetes
+- drone
 tags:
 - kubernetes
 - drone

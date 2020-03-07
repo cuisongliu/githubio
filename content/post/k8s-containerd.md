@@ -4,6 +4,7 @@ slug: kubernetes/containerd
 date: 2019-03-12
 categories:
 - kubernetes
+- containerd
 tags:
 - kubernetes
 - containerd
