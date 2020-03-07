@@ -11,7 +11,7 @@ steps:
     commands:
       - git clone --recursive https://github.com/cuisongliu/githubio.git
   - name: build-hugo
-    image: golang:1.11
+    image: golang:1.13
     settings:
       username:
         from_secret: github_username
