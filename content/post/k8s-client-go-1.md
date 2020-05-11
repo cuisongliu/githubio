@@ -22,7 +22,7 @@ showPagination: false
 
 # client-go原理
 
-![client](/img/client-go/640.webp)
+![client](/img/client-go/640.png)
 
 
 1. Controller 使用 informer 来 list/watch apiserver，然后将资源存储于本地的 cache 中。
