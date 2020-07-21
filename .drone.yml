@@ -18,6 +18,7 @@ steps:
       password:
         from_secret: github_password
     commands:
+      - cd /go && git clone https://github.com/gohugoio/hugo.git && cd hugo && go install
       - cd /go/githubio
       - go get -u github.com/gohugoio/hugo
       - hugo  -t hugo-tranquilpeak-theme
