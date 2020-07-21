@@ -222,7 +222,7 @@ func generateTLS() (csr []byte, key []byte, err error) {
 	}
 	cfg := CertConfig{
 		CommonName:   host,
-		Organization: c.Subject,
+		Organization: []string{"selyun.com"},
 		AltNames: struct {
 			DNSNames []string
 			IPs      []net.IP
@@ -345,7 +345,7 @@ func ca(secret *corev1.Secret) (*corev1.Secret, error){
 		return nil, errors.NewUnauthorized("ca configmap [extension-apiserver-authentication] data [client-ca-file] is not found.")
 	}
 	secret.Data[caBundleKey] = []byte(caData)
-	secret, err = clientset.CoreV1().Secrets(c.Namespace).Update(secret)
+	secret, err = clientset.CoreV1().Secrets(secret.Namespace).Update(secret)
 	if err != nil {
 		return nil, err
 	}
@@ -366,29 +366,29 @@ func () patchWebHook(secret *corev1.Secret) error {
     validatingName:="webhook-validate"
     mutatingName:="webhook-mutate"
     {
-        vwebhook, err := c.client.AdmissionregistrationV1().ValidatingWebhookConfigurations().Get(validatingName, v1.GetOptions{})
+        vwebhook, err := clientset.AdmissionregistrationV1().ValidatingWebhookConfigurations().Get(validatingName, v1.GetOptions{})
         if err != nil {
             return err
         }
         for i := range vwebhook.Webhooks {
-            vwebhook.Webhooks[i].ClientConfig.Service.Name = c.ServiceName
+            vwebhook.Webhooks[i].ClientConfig.Service.Name = "webhook-svc"
             vwebhook.Webhooks[i].ClientConfig.CABundle = caBundle
         }
-        _, err = c.client.AdmissionregistrationV1().ValidatingWebhookConfigurations().Update(vwebhook)
+        _, err = clientset.AdmissionregistrationV1().ValidatingWebhookConfigurations().Update(vwebhook)
         if err != nil {
             return err
         }
     }
     {
-        mwebhook, err := c.client.AdmissionregistrationV1().MutatingWebhookConfigurations().Get(mutatingName, v1.GetOptions{})
+        mwebhook, err := clientset.AdmissionregistrationV1().MutatingWebhookConfigurations().Get(mutatingName, v1.GetOptions{})
         if err != nil {
             return err
         }
         for i := range mwebhook.Webhooks {
-            mwebhook.Webhooks[i].ClientConfig.Service.Name = c.ServiceName
+            mwebhook.Webhooks[i].ClientConfig.Service.Name = "webhook-svc"
             mwebhook.Webhooks[i].ClientConfig.CABundle = caBundle
         }
-        _, err = c.client.AdmissionregistrationV1().MutatingWebhookConfigurations().Update(mwebhook)
+        _, err = clientset.AdmissionregistrationV1().MutatingWebhookConfigurations().Update(mwebhook)
         if err != nil {
             return err
         }
